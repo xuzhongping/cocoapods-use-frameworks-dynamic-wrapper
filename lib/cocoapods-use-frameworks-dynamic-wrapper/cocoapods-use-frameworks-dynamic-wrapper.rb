@@ -55,7 +55,7 @@ module Pod
           pod_targets.each do |pod_target|
             pod_target.instance_variable_set(:@should_build, true)
             module_name = pod_target.root_spec.attributes_hash['module_name'] || pod_target.root_spec.attributes_hash['name']
-            pod_target.root_spec.attributes_hash['module_name'] = module_name + '_dylib_wrapper_pod'
+            pod_target.root_spec.attributes_hash['module_name'] = module_name + '_dynamic_wrapper_pod'
             pod_target.build_settings.each_value do |setting|
               setting.instance_eval { def requires_objc_linker_flag?() true end }
             end
