@@ -12,7 +12,7 @@ A description of cocoapods-use-frameworks-dynamic-wrapper.
 plugin 'cocoapods-use-frameworks-dynamic-wrapper'
 
 target :ExampleTarget do
-  use_frameworks! :dynamic-wrapper => true
+  use_frameworks! :dynamic_wrapper => true
 
   pod 'SomePod'
 end
