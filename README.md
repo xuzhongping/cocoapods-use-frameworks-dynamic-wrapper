@@ -1,6 +1,6 @@
 # cocoapods-use-frameworks-dynamic-wrapper
 
-A description of cocoapods-use-frameworks-dynamic-wrapper.
+The CocoaPods plugin can automatically fix static framework transitive dependencies problems.
 
 ## Installation
 
