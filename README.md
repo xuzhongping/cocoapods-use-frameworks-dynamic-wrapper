@@ -8,4 +8,13 @@ A description of cocoapods-use-frameworks-dynamic-wrapper.
 
 ## Usage
 
-    $ pod spec wrapper POD_NAME
+```ruby
+plugin 'cocoapods-use-frameworks-dynamic-wrapper'
+
+target :ExampleTarget do
+  use_frameworks! :dynamic-wrapper => true
+
+  pod 'SomePod'
+end
+```
+
