@@ -57,7 +57,7 @@ module Pod
             module_name = pod_target.root_spec.attributes_hash['module_name'] || pod_target.root_spec.attributes_hash['name']
             pod_target.root_spec.attributes_hash['module_name'] = module_name + '_dynamic_wrapper_pod'
             pod_target.build_settings.each_value do |setting|
-              setting.instance_eval { def requires_objc_linker_flag?() true end }
+              def setting.requires_objc_linker_flag?; true; end
             end
           end
         end
@@ -72,7 +72,7 @@ module Pod
           end
 
           def dynamic_wrapper_flush(pod_target_installer)
-            pod_target_installer.instance_eval{ def validate_targets_contain_sources(native_targets) end }
+            def pod_target_installer.validate_targets_contain_sources(native_targets); end
           end
         end
       end
