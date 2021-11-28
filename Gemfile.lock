@@ -21,7 +21,8 @@ GEM
       httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
     atomos (0.1.3)
-    bacon (1.2.0)
+    bundle (0.0.1)
+      bundler
     claide (1.0.3)
     cocoapods (1.11.2)
       addressable (~> 2.8)
@@ -74,19 +75,17 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.6.1)
     minitest (5.14.4)
-    mocha (1.13.0)
-    mocha-on-bacon (0.2.3)
-      mocha (>= 0.13.0)
     molinillo (0.8.0)
     nanaimo (0.3.0)
     nap (1.1.0)
     netrc (0.11.0)
-    prettybacon (0.0.2)
-      bacon (~> 1.2)
+    power_assert (2.0.1)
     public_suffix (4.0.6)
     rake (13.0.6)
     rexml (3.2.5)
     ruby-macho (2.5.1)
+    test-unit (3.5.1)
+      power_assert
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
     tzinfo (2.0.4)
@@ -104,14 +103,10 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
-  bacon
-  bundler
-  cocoapods
+  bundle
   cocoapods-use-frameworks-dynamic-wrapper!
-  mocha
-  mocha-on-bacon
-  prettybacon
   rake
+  test-unit
 
 BUNDLED WITH
    2.2.31
