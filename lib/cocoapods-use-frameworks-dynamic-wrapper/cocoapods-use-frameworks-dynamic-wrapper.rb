@@ -11,7 +11,7 @@ module Pod
     end
 
     def should_dynamic_wrapper?
-      real_should_build == false && target_definitions.select(&:dynamic_wrapper).length > 0 && file_accessors.flat_map(&:vendored_static_artifacts).length > 0
+      !real_should_build && target_definitions.any?(&:dynamic_wrapper) && !file_accessors.flat_map(&:vendored_static_artifacts).empty?
     end
   end
 
