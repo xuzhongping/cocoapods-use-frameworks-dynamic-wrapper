@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/xuzhongping/cocoapods-use-frameworks-dynamic-wrapper'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = Dir['lib/**/*']
   spec.test_files    = spec.files.grep(%r{^(test|cocoapods-use-frameworks-dynamic-wrapper)/})
   spec.require_paths = ['lib']
 
