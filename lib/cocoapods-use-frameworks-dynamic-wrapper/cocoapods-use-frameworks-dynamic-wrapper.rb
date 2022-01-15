@@ -11,7 +11,7 @@ module Pod
     end
 
     def should_dynamic_wrapper?
-      !real_should_build && target_definitions.any?(&:dynamic_wrapper) && !file_accessors.flat_map(&:vendored_static_artifacts).empty?
+      target_definitions.any?(&:dynamic_wrapper) && !real_should_build && !file_accessors.flat_map(&:vendored_static_artifacts).empty?
     end
   end
 
@@ -46,9 +46,9 @@ module Pod
               depended_upon_targets = unbuilt_targets & dependencies
               wrapper_targets = depended_upon_targets.select(&:should_dynamic_wrapper?)
               dynamic_wrapper_flush(wrapper_targets)
-              original_verify_no_static_framework_transitive_dependencies
             end
           end
+          original_verify_no_static_framework_transitive_dependencies
         end
 
         def dynamic_wrapper_flush(pod_targets)
