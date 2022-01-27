@@ -60,6 +60,103 @@ module CocoapodsUseFrameworksDynamicWrapper
       end
     end
   end
+  
+  describe :CocoapodsUseFrameworksDynamicWrapper do
+
+    def simple_example_root
+      Pathname.new(File.expand_path('../env/simpleExample', __FILE__))
+    end
+
+    def exec_pod_install
+      is_success = false
+      Dir.chdir(simple_example_root) do
+        is_success = system('bundle exec pod install >/dev/null 2>&1')
+      end
+      is_success
+    end
+
+    def write_podfile(content)
+      podfile = simple_example_root + 'Podfile'
+      podfile.write(content)
+    end
+
+    before do
+      write_podfile <<EOF
+target 'simpleExample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  
+  target 'simpleExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'simpleExampleUITests' do
+    # Pods for testing
+  end
+end
+EOF
+      exec_pod_install
+    end
+
+    it 'raise static framework transitive dependencies' do
+      write_podfile <<EOF
+target 'simpleExample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  project 'simpleExample.xcodeproj'
+  
+  pod 'AppleDY', :path => './Modules/AppleDY/AppleDY.podspec', :inhibit_warnings => true
+  pod 'Apple', :path => './Modules/Apple/Apple.podspec'
+
+  pod 'AFNetworking'
+  # Pods for simpleExample
+
+  target 'simpleExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'simpleExampleUITests' do
+    # Pods for testing
+  end
+
+end
+EOF
+
+      exec_pod_install.should.false?
+    end
+
+    it 'fix static framework transitive dependencies' do
+      write_podfile <<EOF
+plugin 'cocoapods-use-frameworks-dynamic-wrapper'
+
+target 'simpleExample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks! :dynamic_wrapper => true
+
+  project 'simpleExample.xcodeproj'
+
+  pod 'AppleDY', :path => './Modules/AppleDY/AppleDY.podspec', :inhibit_warnings => true
+  pod 'Apple', :path => './Modules/Apple/Apple.podspec'
+
+  pod 'AFNetworking'
+  # Pods for simpleExample
+
+  target 'simpleExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'simpleExampleUITests' do
+    # Pods for testing
+  end
+
+end
+EOF
+      exec_pod_install.should.true?
+    end
+  end
 
 end
 
