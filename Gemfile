@@ -6,5 +6,5 @@ gemspec
 group :development do
   gem 'bundle'
   gem 'rake'
-  gem 'test-unit'
+  gem 'bacon'
 end
