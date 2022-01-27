@@ -21,6 +21,7 @@ GEM
       httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
     atomos (0.1.3)
+    bacon (1.2.0)
     bundle (0.0.1)
       bundler
     claide (1.0.3)
@@ -105,10 +106,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bacon
   bundle
   cocoapods-use-frameworks-dynamic-wrapper!
   rake
   test-unit
 
 BUNDLED WITH
-   2.2.31
+   2.3.3
